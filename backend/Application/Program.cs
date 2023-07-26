@@ -1,5 +1,7 @@
 using Microsoft.OpenApi.Models;
 
+using Infrastructure.Contexts;
+using Infrastructure.Migrators;
 using Infrastructure.Extensions;
 
     var builder = WebApplication.CreateBuilder(args);
@@ -7,9 +9,9 @@ using Infrastructure.Extensions;
         ConfigureServices(builder.Services);
 
     var app = builder.Build();
+    var context = builder.Services.BuildServiceProvider().GetRequiredService<Context>();
 
-
-
+        Configure(context);
 
             if (app.Environment.IsDevelopment()) {
                 app.UseSwagger();
@@ -41,4 +43,8 @@ using Infrastructure.Extensions;
                                 Description = "The Stand-in: Find your perfect date."
                             });
                         });
+                    }
+
+                    void Configure(Context context) {
+                        Migrator.MigrateDatabase(context);
                     }
