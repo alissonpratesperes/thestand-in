@@ -1,5 +1,7 @@
 using Microsoft.OpenApi.Models;
 
+using Infrastructure.Extensions;
+
     var builder = WebApplication.CreateBuilder(args);
 
         ConfigureServices(builder.Services);
@@ -19,14 +21,14 @@ using Microsoft.OpenApi.Models;
                 app.Run();
 
                     void ConfigureServices(IServiceCollection services) {
-
+                        IConfiguration configuration = builder.Configuration;
 
                             services.AddControllers();
                             services.AddEndpointsApiExplorer();
                             services.AddSwaggerGen();
 
                             services.AddAuthorization();
-
+                            services.AddDatabase(configuration);
 
                                 ConfigureSwagger(services);
                     }
