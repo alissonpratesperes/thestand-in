@@ -1,5 +1,7 @@
+using MediatR;
 using Microsoft.OpenApi.Models;
 
+using Domain.Shared.Entities;
 using Infrastructure.Contexts;
 using Infrastructure.Migrators;
 using Infrastructure.Extensions;
@@ -28,7 +30,7 @@ using Infrastructure.Extensions;
                             services.AddControllers();
                             services.AddEndpointsApiExplorer();
                             services.AddSwaggerGen();
-
+                            services.AddMediatR(cfg => { cfg.RegisterServicesFromAssembly(typeof(Entity).Assembly); });
                             services.AddAuthorization();
                             services.AddDatabase(configuration);
 
