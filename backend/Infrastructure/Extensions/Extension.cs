@@ -4,6 +4,10 @@ using Microsoft.Extensions.DependencyInjection;
 using Domain.Shared.Data;
 using Infrastructure.Contexts;
 using Infrastructure.Shared.Data;
+using Domain.Requested.Repositories;
+using Infrastructure.Repositories.Requested;
+
+
 
     namespace Infrastructure.Extensions {
         public static class Extension {
@@ -17,6 +21,7 @@ using Infrastructure.Shared.Data;
             }
 
                 private static void AddRepositories(IServiceCollection services) {
+                    services.AddTransient<IProspectRepository, ProspectRepository>();
 
                 }
         }
