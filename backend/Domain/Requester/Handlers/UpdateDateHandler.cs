@@ -28,7 +28,8 @@ using Domain.Requester.Repositories;
                                 longitude: request.Longitude,
                                 description: request.Description,
                                 displacement: request.Displacement,
-                                contribution: request.Contribution
+                                contribution: request.Contribution,
+                                prospectId: request.ProspectId
                             );
 
                                 _dateRepository.Update(date);

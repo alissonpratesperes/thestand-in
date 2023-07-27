@@ -1,4 +1,5 @@
 using Domain.Shared.Entities;
+using Domain.Requester.Models;
 
     namespace Domain.Requested.Models {
         public class Prospect : Entity {
@@ -11,43 +12,47 @@ using Domain.Shared.Entities;
             public DateOnly Birth { get; private set; }
             public string Picture { get; private set; }
 
-                public Prospect(
-                    string name,
-                    decimal goal,
-                    bool active,
-                    string contact,
-                    string biography,
-                    bool available,
-                    DateOnly birth,
-                    string picture
-                ) {
-                    this.Name = name;
-                    this.Goal = goal;
-                    this.Active = active;
-                    this.Contact = contact;
-                    this.Biography = biography;
-                    this.Available = available;
-                    this.Birth = birth;
-                    this.Picture = picture;
-                }
-                public void Update(
-                    string name,
-                    decimal goal,
-                    bool active,
-                    string contact,
-                    string biography,
-                    bool available,
-                    DateOnly birth,
-                    string picture
-                ) {
-                    this.Name = name;
-                    this.Goal = goal;
-                    this.Active = active;
-                    this.Contact = contact;
-                    this.Biography = biography;
-                    this.Available = available;
-                    this.Birth = birth;
-                    this.Picture = picture;
-                }
+                private readonly List<Date> _dates = new List<Date>();
+                public IReadOnlyCollection<Date> Dates  =>  _dates;
+                public void NewDate(Date date)  =>  _dates.Add(date);
+
+                    public Prospect(
+                        string name,
+                        decimal goal,
+                        bool active,
+                        string contact,
+                        string biography,
+                        bool available,
+                        DateOnly birth,
+                        string picture
+                    ) {
+                        this.Name = name;
+                        this.Goal = goal;
+                        this.Active = active;
+                        this.Contact = contact;
+                        this.Biography = biography;
+                        this.Available = available;
+                        this.Birth = birth;
+                        this.Picture = picture;
+                    }
+                    public void Update(
+                        string name,
+                        decimal goal,
+                        bool active,
+                        string contact,
+                        string biography,
+                        bool available,
+                        DateOnly birth,
+                        string picture
+                    ) {
+                        this.Name = name;
+                        this.Goal = goal;
+                        this.Active = active;
+                        this.Contact = contact;
+                        this.Biography = biography;
+                        this.Available = available;
+                        this.Birth = birth;
+                        this.Picture = picture;
+                    }
         }
     }

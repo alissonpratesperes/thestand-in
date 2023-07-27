@@ -15,5 +15,6 @@ using Domain.Shared.Enumerators;
             public string Description { get; set; }
             public EDisplacement Displacement { get; set; }
             public decimal Contribution { get; set; }
+            public Guid ProspectId { get; set; }
         }
     }

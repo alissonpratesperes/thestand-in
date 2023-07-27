@@ -15,7 +15,7 @@ using Domain.Requested.Repositories;
                     =>  await _context.Prospects.AddAsync(prospect);
 
                 public async Task<Prospect?> Read(Guid id)
-                    =>  await _context.Prospects.Where(x => x.Id == id).FirstOrDefaultAsync();
+                    =>  await _context.Prospects.Where(x => x.Id == id).Include(d => d.Dates).FirstOrDefaultAsync();
 
                 public void Update(Prospect prospect)
                     =>  _context.Entry(prospect).State = EntityState.Modified;

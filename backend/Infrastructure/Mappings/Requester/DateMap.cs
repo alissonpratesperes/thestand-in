@@ -16,6 +16,8 @@ using Infrastructure.Shared.Mappings;
                 builder.Property(d => d.Description);
                 builder.Property(d => d.Displacement);
                 builder.Property(d => d.Contribution);
+
+                builder.HasOne(p => p.Prospect).WithMany(d => d.Dates).HasForeignKey(p => p.ProspectId);
             }
         }
     }

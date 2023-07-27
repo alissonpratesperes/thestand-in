@@ -14,6 +14,8 @@ using Infrastructure.Shared.Mappings;
                 builder.Property(p => p.Available);
                 builder.Property(p => p.Birth);
                 builder.Property(p => p.Picture);
+
+                builder.HasMany(d => d.Dates).WithOne(p => p.Prospect).HasForeignKey(p => p.ProspectId);
             }
         }
     }
