@@ -2,16 +2,20 @@ using Microsoft.EntityFrameworkCore;
 
 using Domain.Shared.Entities;
 using Domain.Requested.Models;
+using Domain.Requester.Models;
 using Infrastructure.Mappings.Requested;
+using Infrastructure.Mappings.Requester;
 
     namespace Infrastructure.Contexts {
         public class Context : DbContext {
             public Context(DbContextOptions<Context> options) : base(options) {}
 
                 public DbSet<Prospect> Prospects { get; set; }
+                public DbSet<Date> Dates { get; set; }
 
                     protected override void OnModelCreating(ModelBuilder builder) {
                         builder.ApplyConfiguration(new ProspectMap());
+                        builder.ApplyConfiguration(new DateMap());
                     }
 
                         public override Task<int> SaveChangesAsync(bool acceptAllChangesOnSuccess, CancellationToken cancellationToken = default(CancellationToken)) {
