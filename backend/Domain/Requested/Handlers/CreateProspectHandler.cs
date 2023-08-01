@@ -1,6 +1,8 @@
 using MediatR;
+using System.Net;
 
 using Domain.Shared.Data;
+using Domain.Shared.Results;
 using Domain.Shared.Handlers;
 using Domain.Requested.Models;
 using Domain.Requested.Commands;
@@ -15,7 +17,7 @@ using Domain.Requested.Repositories;
                 _unityOfWork = unityOfWork;
             }
 
-                public override async Task<Unit> Handle(CreateProspectCommand request, CancellationToken cancellationToken) {
+                public override async Task<CommandResult<Unit>> Handle(CreateProspectCommand request, CancellationToken cancellationToken) {
                     var prospect = new Prospect(
                         name: request.Name,
                         goal: request.Goal,
@@ -30,7 +32,10 @@ using Domain.Requested.Repositories;
                         await _prospectRepository.Create(prospect);
                         await _unityOfWork.Commit();
 
-                            return Unit.Value;
+                            return new CommandResult<Unit>(
+                                statusCode: HttpStatusCode.Created,
+                                statusHint: "Created"
+                            );
                 }
         }
     }

@@ -1,6 +1,8 @@
 using MediatR;
+using System.Net;
 
 using Domain.Shared.Data;
+using Domain.Shared.Results;
 using Domain.Shared.Handlers;
 using Domain.Requester.Commands;
 using Domain.Requester.Repositories;
@@ -14,7 +16,7 @@ using Domain.Requester.Repositories;
                 _unityOfWork = unityOfWork;
             }
 
-                public override async Task<Unit> Handle(UpdateDateCommand request, CancellationToken cancellationToken) {
+                public override async Task<CommandResult<Unit>> Handle(UpdateDateCommand request, CancellationToken cancellationToken) {
                     var date = await _dateRepository.Read(request.Id);
 
                         if(date != null) {
@@ -36,10 +38,16 @@ using Domain.Requester.Repositories;
 
                                     await _unityOfWork.Commit();
 
-                                        return Unit.Value;
+                                        return new CommandResult<Unit>(
+                                            statusCode: HttpStatusCode.OK,
+                                            statusHint: "OK"
+                                        );
                         }
 
-                            return Unit.Value;
+                            return new CommandResult<Unit>(
+                                statusCode: HttpStatusCode.NotFound,
+                                statusHint: "NotFound"
+                            );
                 }
         }
     }

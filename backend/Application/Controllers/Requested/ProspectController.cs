@@ -1,6 +1,7 @@
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
+using Domain.Shared.Results;
 using Domain.Requested.Commands;
 
     namespace Application.Controllers.Requested {
@@ -13,15 +14,15 @@ using Domain.Requested.Commands;
             }
 
                 [HttpPost]
-                public async Task<Unit> Create([FromBody] CreateProspectCommand command)
+                public async Task<CommandResult<Unit>> Create([FromBody] CreateProspectCommand command)
                     =>  await _mediator.Send(command);
 
                 [HttpPut]
-                public async Task<Unit> Update([FromBody] UpdateProspectCommand command)
+                public async Task<CommandResult<Unit>> Update([FromBody] UpdateProspectCommand command)
                     =>  await _mediator.Send(command);
 
                 [HttpDelete]
-                public async Task<Unit> Delete([FromQuery] DeleteProspectCommand command)
+                public async Task<CommandResult<Unit>> Delete([FromQuery] DeleteProspectCommand command)
                     =>  await _mediator.Send(command);
         }
     }

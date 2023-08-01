@@ -1,6 +1,8 @@
 using MediatR;
+using System.Net;
 
 using Domain.Shared.Data;
+using Domain.Shared.Results;
 using Domain.Shared.Handlers;
 using Domain.Requester.Models;
 using Domain.Requester.Commands;
@@ -15,7 +17,7 @@ using Domain.Requester.Repositories;
                 _unityOfWork = unityOfWork;
             }
 
-                public override async Task<Unit> Handle(CreateDateCommand request, CancellationToken cancellationToken) {
+                public override async Task<CommandResult<Unit>> Handle(CreateDateCommand request, CancellationToken cancellationToken) {
                     var date = new Date(
                         name: request.Name,
                         title: request.Title,
@@ -33,7 +35,10 @@ using Domain.Requester.Repositories;
                         await _dateRepository.Create(date);
                         await _unityOfWork.Commit();
 
-                            return Unit.Value;
+                            return new CommandResult<Unit>(
+                                statusCode: HttpStatusCode.Created,
+                                statusHint: "Created"
+                            );
                 }
         }
     }

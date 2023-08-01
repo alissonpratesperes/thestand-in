@@ -1,10 +1,11 @@
 using MediatR;
 
+using Domain.Shared.Results;
 using Domain.Shared.Commands;
 using Domain.Shared.Enumerators;
 
     namespace Domain.Requester.Commands {
-        public class CreateDateCommand : Command<Unit> {
+        public class CreateDateCommand : Command<CommandResult<Unit>> {
             public string Name { get; set; }
             public string Title { get; set; }
             public EStatus Status { get; set; }

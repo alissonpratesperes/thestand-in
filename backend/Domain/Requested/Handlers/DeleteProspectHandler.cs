@@ -1,6 +1,8 @@
 using MediatR;
+using System.Net;
 
 using Domain.Shared.Data;
+using Domain.Shared.Results;
 using Domain.Shared.Handlers;
 using Domain.Requested.Commands;
 using Domain.Requested.Repositories;
@@ -14,7 +16,7 @@ using Domain.Requested.Repositories;
                 _unityOfWork = unityOfWork;
             }
 
-                public override async Task<Unit> Handle(DeleteProspectCommand request, CancellationToken cancellationToken) {
+                public override async Task<CommandResult<Unit>> Handle(DeleteProspectCommand request, CancellationToken cancellationToken) {
                     var prospect = await _prospectRepository.Read(request.Id);
 
                         if(prospect != null) {
@@ -22,10 +24,16 @@ using Domain.Requested.Repositories;
 
                                 await _unityOfWork.Commit();
 
-                                    return Unit.Value;
+                                    return new CommandResult<Unit>(
+                                        statusCode: HttpStatusCode.NoContent,
+                                        statusHint: "NoContent"
+                                    );
                         }
 
-                            return Unit.Value;
+                            return new CommandResult<Unit>(
+                                statusCode: HttpStatusCode.NotFound,
+                                statusHint: "NotFound"
+                            );
                 }
         }
     }
