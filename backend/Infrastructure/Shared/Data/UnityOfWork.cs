@@ -10,5 +10,8 @@ using Infrastructure.Contexts;
 
                 public async Task<int> Commit()
                     =>  await _context.SaveChangesAsync();
+
+                public void Rollback()
+                    =>  _context.Database.CurrentTransaction?.Rollback();
         }    
     }
