@@ -21,14 +21,21 @@ using Domain.Requested.Repositories;
 
                         if(prospect != null) {
                             try {
-                                _prospectRepository.Delete(prospect);
+                                if(prospect.Dates.Count > 0) {
+                                    return new CommandResult<Unit>(
+                                        statusCode: HttpStatusCode.BadRequest,
+                                        statusHint: "BadRequest"
+                                    );
+                                } else {
+                                    _prospectRepository.Delete(prospect);
 
-                                    await _unityOfWork.Commit();
+                                        await _unityOfWork.Commit();
 
-                                        return new CommandResult<Unit>(
-                                            statusCode: HttpStatusCode.NoContent,
-                                            statusHint: "NoContent"
-                                        );
+                                            return new CommandResult<Unit>(
+                                                statusCode: HttpStatusCode.NoContent,
+                                                statusHint: "NoContent"
+                                            );
+                                }
                             } catch (Exception exception) {
                                 _unityOfWork.Rollback();
 
@@ -42,7 +49,7 @@ using Domain.Requested.Repositories;
                             return new CommandResult<Unit>(
                                 statusCode: HttpStatusCode.NotFound,
                                 statusHint: "NotFound"
-                            );       
+                            );
                 }
         }
     }

@@ -4,6 +4,7 @@ using System.Net;
 using Domain.Shared.Data;
 using Domain.Shared.Results;
 using Domain.Shared.Handlers;
+using Domain.Shared.Enumerators;
 using Domain.Requested.Commands;
 using Domain.Requested.Repositories;
 
@@ -21,25 +22,32 @@ using Domain.Requested.Repositories;
 
                         if(prospect != null) {
                             try {
-                                prospect.Update(
-                                    name: request.Name,
-                                    goal: request.Goal,
-                                    active: request.Active,
-                                    contact: request.Contact,
-                                    biography: request.Biography,
-                                    available: request.Available,
-                                    birth: request.Birth,
-                                    picture: request.Picture
-                                );
+                                if(prospect.Dates.Count(date => date.Status == EStatus.Requested) > 0) {
+                                    return new CommandResult<Unit>(
+                                        statusCode: HttpStatusCode.BadRequest,
+                                        statusHint: "BadRequest"
+                                    );
+                                } else {
+                                    prospect.Update(
+                                        name: request.Name,
+                                        goal: request.Goal,
+                                        active: request.Active,
+                                        contact: request.Contact,
+                                        biography: request.Biography,
+                                        available: request.Available,
+                                        birth: request.Birth,
+                                        picture: request.Picture
+                                    );
 
-                                    _prospectRepository.Update(prospect);
+                                        _prospectRepository.Update(prospect);
 
-                                        await _unityOfWork.Commit();
+                                            await _unityOfWork.Commit();
 
-                                            return new CommandResult<Unit>(
-                                                statusCode: HttpStatusCode.OK,
-                                                statusHint: "OK"
-                                            );
+                                                return new CommandResult<Unit>(
+                                                    statusCode: HttpStatusCode.OK,
+                                                    statusHint: "OK"
+                                                );
+                                }
                             } catch (Exception exception) {
                                 _unityOfWork.Rollback();
 
