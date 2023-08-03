@@ -20,25 +20,34 @@ using Domain.Requested.Repositories;
                     var prospect = await _prospectRepository.Read(request.Id);
 
                         if(prospect != null) {
-                            prospect.Update(
-                                name: request.Name,
-                                goal: request.Goal,
-                                active: request.Active,
-                                contact: request.Contact,
-                                biography: request.Biography,
-                                available: request.Available,
-                                birth: request.Birth,
-                                picture: request.Picture
-                            );
+                            try {
+                                prospect.Update(
+                                    name: request.Name,
+                                    goal: request.Goal,
+                                    active: request.Active,
+                                    contact: request.Contact,
+                                    biography: request.Biography,
+                                    available: request.Available,
+                                    birth: request.Birth,
+                                    picture: request.Picture
+                                );
 
-                                _prospectRepository.Update(prospect);
+                                    _prospectRepository.Update(prospect);
 
-                                    await _unityOfWork.Commit();
+                                        await _unityOfWork.Commit();
 
-                                        return new CommandResult<Unit>(
-                                            statusCode: HttpStatusCode.OK,
-                                            statusHint: "OK"
-                                        );
+                                            return new CommandResult<Unit>(
+                                                statusCode: HttpStatusCode.OK,
+                                                statusHint: "OK"
+                                            );
+                            } catch (Exception exception) {
+                                _unityOfWork.Rollback();
+
+                                    return new CommandResult<Unit>(
+                                        statusCode: HttpStatusCode.InternalServerError,
+                                        statusHint: "InternalServerError"
+                                    );
+                            }
                         }
 
                             return new CommandResult<Unit>(

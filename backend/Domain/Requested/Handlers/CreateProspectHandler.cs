@@ -18,24 +18,33 @@ using Domain.Requested.Repositories;
             }
 
                 public override async Task<CommandResult<Unit>> Handle(CreateProspectCommand request, CancellationToken cancellationToken) {
-                    var prospect = new Prospect(
-                        name: request.Name,
-                        goal: request.Goal,
-                        active: request.Active,
-                        contact: request.Contact,
-                        biography: request.Biography,
-                        available: request.Available,
-                        birth: request.Birth,
-                        picture: request.Picture
-                    );
+                    try {
+                        var prospect = new Prospect(
+                            name: request.Name,
+                            goal: request.Goal,
+                            active: request.Active,
+                            contact: request.Contact,
+                            biography: request.Biography,
+                            available: request.Available,
+                            birth: request.Birth,
+                            picture: request.Picture
+                        );
 
-                        await _prospectRepository.Create(prospect);
-                        await _unityOfWork.Commit();
+                            await _prospectRepository.Create(prospect);
+                            await _unityOfWork.Commit();
+
+                                return new CommandResult<Unit>(
+                                    statusCode: HttpStatusCode.Created,
+                                    statusHint: "Created"
+                                );
+                    } catch (Exception exception) {
+                        _unityOfWork.Rollback();
 
                             return new CommandResult<Unit>(
-                                statusCode: HttpStatusCode.Created,
-                                statusHint: "Created"
+                                statusCode: HttpStatusCode.InternalServerError,
+                                statusHint: "InternalServerError"
                             );
+                    }
                 }
         }
     }
