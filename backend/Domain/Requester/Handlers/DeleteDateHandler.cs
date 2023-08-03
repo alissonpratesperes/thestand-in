@@ -20,20 +20,29 @@ using Domain.Requester.Repositories;
                     var date = await _dateRepository.Read(request.Id);
 
                         if(date != null) {
-                            _dateRepository.Delete(date);
+                            try {
+                                _dateRepository.Delete(date);
 
-                                await _unityOfWork.Commit();
+                                    await _unityOfWork.Commit();
+
+                                        return new CommandResult<Unit>(
+                                            statusCode: HttpStatusCode.NoContent,
+                                            statusHint: "NoContent"
+                                        );
+                            } catch (Exception exception) {
+                                _unityOfWork.Rollback();
 
                                     return new CommandResult<Unit>(
-                                        statusCode: HttpStatusCode.NoContent,
-                                        statusHint: "NoContent"
+                                        statusCode: HttpStatusCode.InternalServerError,
+                                        statusHint: "InternalServerError"
                                     );
+                            }
                         }
 
                             return new CommandResult<Unit>(
                                 statusCode: HttpStatusCode.NotFound,
                                 statusHint: "NotFound"
-                            );
+                            );          
                 }
         }
     }

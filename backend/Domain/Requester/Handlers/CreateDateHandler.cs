@@ -18,27 +18,36 @@ using Domain.Requester.Repositories;
             }
 
                 public override async Task<CommandResult<Unit>> Handle(CreateDateCommand request, CancellationToken cancellationToken) {
-                    var date = new Date(
-                        name: request.Name,
-                        title: request.Title,
-                        status: request.Status,
-                        contact: request.Contact,
-                        schedule: request.Schedule,
-                        latitude: request.Latitude,
-                        longitude: request.Longitude,
-                        description: request.Description,
-                        displacement: request.Displacement,
-                        contribution: request.Contribution,
-                        prospectId: request.ProspectId
-                    );
+                    try {
+                        var date = new Date(
+                            name: request.Name,
+                            title: request.Title,
+                            status: request.Status,
+                            contact: request.Contact,
+                            schedule: request.Schedule,
+                            latitude: request.Latitude,
+                            longitude: request.Longitude,
+                            description: request.Description,
+                            displacement: request.Displacement,
+                            contribution: request.Contribution,
+                            prospectId: request.ProspectId
+                        );
 
-                        await _dateRepository.Create(date);
-                        await _unityOfWork.Commit();
+                            await _dateRepository.Create(date);
+                            await _unityOfWork.Commit();
+
+                                return new CommandResult<Unit>(
+                                    statusCode: HttpStatusCode.Created,
+                                    statusHint: "Created"
+                                );
+                    } catch (Exception exception) {
+                        _unityOfWork.Rollback();
 
                             return new CommandResult<Unit>(
-                                statusCode: HttpStatusCode.Created,
-                                statusHint: "Created"
+                                statusCode: HttpStatusCode.InternalServerError,
+                                statusHint: "InternalServerError"
                             );
+                    }          
                 }
         }
     }

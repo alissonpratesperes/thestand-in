@@ -20,34 +20,43 @@ using Domain.Requester.Repositories;
                     var date = await _dateRepository.Read(request.Id);
 
                         if(date != null) {
-                            date.Update(
-                                name: request.Name,
-                                title: request.Title,
-                                status: request.Status,
-                                contact: request.Contact,
-                                schedule: request.Schedule,
-                                latitude: request.Latitude,
-                                longitude: request.Longitude,
-                                description: request.Description,
-                                displacement: request.Displacement,
-                                contribution: request.Contribution,
-                                prospectId: request.ProspectId
-                            );
+                            try {
+                                date.Update(
+                                    name: request.Name,
+                                    title: request.Title,
+                                    status: request.Status,
+                                    contact: request.Contact,
+                                    schedule: request.Schedule,
+                                    latitude: request.Latitude,
+                                    longitude: request.Longitude,
+                                    description: request.Description,
+                                    displacement: request.Displacement,
+                                    contribution: request.Contribution,
+                                    prospectId: request.ProspectId
+                                );
 
-                                _dateRepository.Update(date);
+                                    _dateRepository.Update(date);
 
-                                    await _unityOfWork.Commit();
+                                        await _unityOfWork.Commit();
 
-                                        return new CommandResult<Unit>(
-                                            statusCode: HttpStatusCode.OK,
-                                            statusHint: "OK"
-                                        );
+                                            return new CommandResult<Unit>(
+                                                statusCode: HttpStatusCode.OK,
+                                                statusHint: "OK"
+                                            );
+                            } catch (Exception exception) {
+                                _unityOfWork.Rollback();
+
+                                    return new CommandResult<Unit>(
+                                        statusCode: HttpStatusCode.InternalServerError,
+                                        statusHint: "InternalServerError"
+                                    );
+                            }
                         }
 
                             return new CommandResult<Unit>(
                                 statusCode: HttpStatusCode.NotFound,
                                 statusHint: "NotFound"
-                            );
+                            );         
                 }
         }
     }
