@@ -47,7 +47,7 @@ using Domain.Requester.Repositories;
                                 statusCode: HttpStatusCode.InternalServerError,
                                 statusHint: "InternalServerError"
                             );
-                    }          
+                    }
                 }
         }
     }

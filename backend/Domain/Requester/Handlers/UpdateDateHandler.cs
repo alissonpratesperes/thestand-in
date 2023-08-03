@@ -4,6 +4,7 @@ using System.Net;
 using Domain.Shared.Data;
 using Domain.Shared.Results;
 using Domain.Shared.Handlers;
+using Domain.Shared.Enumerators;
 using Domain.Requester.Commands;
 using Domain.Requester.Repositories;
 
@@ -21,28 +22,35 @@ using Domain.Requester.Repositories;
 
                         if(date != null) {
                             try {
-                                date.Update(
-                                    name: request.Name,
-                                    title: request.Title,
-                                    status: request.Status,
-                                    contact: request.Contact,
-                                    schedule: request.Schedule,
-                                    latitude: request.Latitude,
-                                    longitude: request.Longitude,
-                                    description: request.Description,
-                                    displacement: request.Displacement,
-                                    contribution: request.Contribution,
-                                    prospectId: request.ProspectId
-                                );
+                                if(date.Status != EStatus.Requested) {
+                                    return new CommandResult<Unit>(
+                                        statusCode: HttpStatusCode.BadRequest,
+                                        statusHint: "BadRequest"
+                                    );
+                                } else {
+                                    date.Update(
+                                        name: request.Name,
+                                        title: request.Title,
+                                        status: request.Status,
+                                        contact: request.Contact,
+                                        schedule: request.Schedule,
+                                        latitude: request.Latitude,
+                                        longitude: request.Longitude,
+                                        description: request.Description,
+                                        displacement: request.Displacement,
+                                        contribution: request.Contribution,
+                                        prospectId: request.ProspectId
+                                    );
 
-                                    _dateRepository.Update(date);
+                                        _dateRepository.Update(date);
 
-                                        await _unityOfWork.Commit();
+                                            await _unityOfWork.Commit();
 
-                                            return new CommandResult<Unit>(
-                                                statusCode: HttpStatusCode.OK,
-                                                statusHint: "OK"
-                                            );
+                                                return new CommandResult<Unit>(
+                                                    statusCode: HttpStatusCode.OK,
+                                                    statusHint: "OK"
+                                                );
+                                }
                             } catch (Exception exception) {
                                 _unityOfWork.Rollback();
 
@@ -56,7 +64,7 @@ using Domain.Requester.Repositories;
                             return new CommandResult<Unit>(
                                 statusCode: HttpStatusCode.NotFound,
                                 statusHint: "NotFound"
-                            );         
+                            );
                 }
         }
     }

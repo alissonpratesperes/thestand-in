@@ -4,6 +4,7 @@ using System.Net;
 using Domain.Shared.Data;
 using Domain.Shared.Results;
 using Domain.Shared.Handlers;
+using Domain.Shared.Enumerators;
 using Domain.Requester.Commands;
 using Domain.Requester.Repositories;
 
@@ -21,14 +22,21 @@ using Domain.Requester.Repositories;
 
                         if(date != null) {
                             try {
-                                _dateRepository.Delete(date);
+                                if(date.Status != EStatus.Requested) {
+                                    return new CommandResult<Unit>(
+                                        statusCode: HttpStatusCode.BadRequest,
+                                        statusHint: "BadRequest"
+                                    );
+                                } else {
+                                    _dateRepository.Delete(date);
 
-                                    await _unityOfWork.Commit();
+                                        await _unityOfWork.Commit();
 
-                                        return new CommandResult<Unit>(
-                                            statusCode: HttpStatusCode.NoContent,
-                                            statusHint: "NoContent"
-                                        );
+                                            return new CommandResult<Unit>(
+                                                statusCode: HttpStatusCode.NoContent,
+                                                statusHint: "NoContent"
+                                            );
+                                }
                             } catch (Exception exception) {
                                 _unityOfWork.Rollback();
 
@@ -42,7 +50,7 @@ using Domain.Requester.Repositories;
                             return new CommandResult<Unit>(
                                 statusCode: HttpStatusCode.NotFound,
                                 statusHint: "NotFound"
-                            );          
+                            );
                 }
         }
     }
