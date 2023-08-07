@@ -51,7 +51,7 @@ using Domain.Requester.Repositories;
                                                     statusHint: "OK"
                                                 );
                                 }
-                            } catch (Exception exception) {
+                            } catch (Exception) {
                                 _unityOfWork.Rollback();
 
                                     return new CommandResult<Unit>(

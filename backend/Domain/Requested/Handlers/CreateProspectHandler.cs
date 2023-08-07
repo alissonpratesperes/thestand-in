@@ -37,7 +37,7 @@ using Domain.Requested.Repositories;
                                     statusCode: HttpStatusCode.Created,
                                     statusHint: "Created"
                                 );
-                    } catch (Exception exception) {
+                    } catch (Exception) {
                         _unityOfWork.Rollback();
 
                             return new CommandResult<Unit>(

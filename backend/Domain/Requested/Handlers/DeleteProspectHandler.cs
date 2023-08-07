@@ -36,7 +36,7 @@ using Domain.Requested.Repositories;
                                                 statusHint: "NoContent"
                                             );
                                 }
-                            } catch (Exception exception) {
+                            } catch (Exception) {
                                 _unityOfWork.Rollback();
 
                                     return new CommandResult<Unit>(

@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 
+using Domain.Shared.Entities;
 using Infrastructure.Contexts;
 using Domain.Requested.Models;
 using Domain.Requested.Repositories;
@@ -15,7 +16,7 @@ using Domain.Requested.Repositories;
                     =>  await _context.Prospects.AddAsync(prospect);
 
                 public async Task<Prospect?> Read(Guid id)
-                    =>  await _context.Prospects.Where(x => x.Id == id).Include(d => d.Dates).FirstOrDefaultAsync();
+                    =>  await _context.Prospects.Where(prospect => prospect.Id == id).Include(prospect => prospect.Dates).FirstOrDefaultAsync();
 
                 public void Update(Prospect prospect)
                     =>  _context.Entry(prospect).State = EntityState.Modified;

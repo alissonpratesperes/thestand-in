@@ -1,21 +1,22 @@
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 using Domain.Requested.Models;
+using Domain.Requester.Models;
 using Infrastructure.Shared.Mappings;
 
     namespace Infrastructure.Mappings.Requested {
         public class ProspectMap : EntityMap<Prospect> {
             protected override void ConfigureMap(EntityTypeBuilder<Prospect> builder) {
-                builder.Property(p => p.Name);
-                builder.Property(p => p.Goal);
-                builder.Property(p => p.Active);
-                builder.Property(p => p.Contact);
-                builder.Property(p => p.Biography);
-                builder.Property(p => p.Available);
-                builder.Property(p => p.Birth);
-                builder.Property(p => p.Picture);
+                builder.Property(prospect => prospect.Name);
+                builder.Property(prospect => prospect.Goal);
+                builder.Property(prospect => prospect.Active);
+                builder.Property(prospect => prospect.Contact);
+                builder.Property(prospect => prospect.Biography);
+                builder.Property(prospect => prospect.Available);
+                builder.Property(prospect => prospect.Birth);
+                builder.Property(prospect => prospect.Picture);
 
-                builder.HasMany(d => d.Dates).WithOne(p => p.Prospect).HasForeignKey(p => p.ProspectId);
+                builder.HasMany(prospect => prospect.Dates).WithOne(date => date.Prospect).HasForeignKey(date => date.ProspectId);
             }
         }
     }
