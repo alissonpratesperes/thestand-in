@@ -9,7 +9,7 @@ using Domain.Requester.Commands;
 using Domain.Requester.Repositories;
 
     namespace Domain.Requester.Handlers {
-        public class CreateDateHandler : Handler<CreateDateCommand> {
+        public class CreateDateHandler : IHandler<CreateDateCommand> {
             private readonly IDateRepository _dateRepository;
             private readonly IUnityOfWork _unityOfWork;
             public CreateDateHandler(IDateRepository dateRepository, IUnityOfWork unityOfWork) {
@@ -17,7 +17,7 @@ using Domain.Requester.Repositories;
                 _unityOfWork = unityOfWork;
             }
 
-                public override async Task<CommandResult<Unit>> Handle(CreateDateCommand request, CancellationToken cancellationToken) {
+                public async Task<CommandResult<Unit>> Handle(CreateDateCommand request, CancellationToken cancellationToken) {
                     try {
                         var date = new Date(
                             name: request.Name,

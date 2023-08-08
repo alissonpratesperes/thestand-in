@@ -9,7 +9,7 @@ using Domain.Requested.Commands;
 using Domain.Requested.Repositories;
 
     namespace Domain.Requested.Handlers {
-        public class UpdateProspectHandler : Handler<UpdateProspectCommand> {
+        public class UpdateProspectHandler : IHandler<UpdateProspectCommand> {
             private readonly IProspectRepository _prospectRepository;
             private readonly IUnityOfWork _unityOfWork;
             public UpdateProspectHandler(IProspectRepository prospectRepository, IUnityOfWork unityOfWork) {
@@ -17,7 +17,7 @@ using Domain.Requested.Repositories;
                 _unityOfWork = unityOfWork;
             }
 
-                public override async Task<CommandResult<Unit>> Handle(UpdateProspectCommand request, CancellationToken cancellationToken) {
+                public async Task<CommandResult<Unit>> Handle(UpdateProspectCommand request, CancellationToken cancellationToken) {
                     var prospect = await _prospectRepository.Read(request.Id);
 
                         if(prospect != null) {

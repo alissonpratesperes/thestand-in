@@ -8,7 +8,7 @@ using Domain.Requested.Commands;
 using Domain.Requested.Repositories;
 
     namespace Domain.Requested.Handlers {
-        public class DeleteProspectHandler : Handler<DeleteProspectCommand> {
+        public class DeleteProspectHandler : IHandler<DeleteProspectCommand> {
             private readonly IProspectRepository _prospectRepository;
             private readonly IUnityOfWork _unityOfWork;
             public DeleteProspectHandler(IProspectRepository prospectRepository, IUnityOfWork unityOfWork) {
@@ -16,7 +16,7 @@ using Domain.Requested.Repositories;
                 _unityOfWork = unityOfWork;
             }
 
-                public override async Task<CommandResult<Unit>> Handle(DeleteProspectCommand request, CancellationToken cancellationToken) {
+                public async Task<CommandResult<Unit>> Handle(DeleteProspectCommand request, CancellationToken cancellationToken) {
                     var prospect = await _prospectRepository.Read(request.Id);
 
                         if(prospect != null) {
