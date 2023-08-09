@@ -12,45 +12,35 @@ using Domain.Requester.Repositories;
         public class DeleteDateHandler : IHandler<DeleteDateCommand> {
             private readonly IDateRepository _dateRepository;
             private readonly IUnityOfWork _unityOfWork;
-            public DeleteDateHandler(IDateRepository dateRepository, IUnityOfWork unityOfWork) {
+            private readonly ICommandResult<Unit> _commandResult;
+            public DeleteDateHandler(IDateRepository dateRepository, IUnityOfWork unityOfWork, ICommandResult<Unit> commandResult) {
                 _dateRepository = dateRepository;
                 _unityOfWork = unityOfWork;
+                _commandResult = commandResult;
             }
 
-                public async Task<CommandResult<Unit>> Handle(DeleteDateCommand request, CancellationToken cancellationToken) {
+                public async Task<ICommandResult<Unit>> Handle(DeleteDateCommand request, CancellationToken cancellationToken) {
                     var date = await _dateRepository.Read(request.Id);
 
                         if(date != null) {
                             try {
                                 if(date.Status != EStatus.Requested) {
-                                    return new CommandResult<Unit>(
-                                        statusCode: HttpStatusCode.BadRequest,
-                                        statusHint: "BadRequest"
-                                    );
+                                    return _commandResult.BadRequest();
                                 } else {
                                     _dateRepository.Delete(date);
 
                                         await _unityOfWork.Commit();
 
-                                            return new CommandResult<Unit>(
-                                                statusCode: HttpStatusCode.NoContent,
-                                                statusHint: "NoContent"
-                                            );
+                                            return _commandResult.NoContent();
                                 }
                             } catch (Exception) {
                                 _unityOfWork.Rollback();
 
-                                    return new CommandResult<Unit>(
-                                        statusCode: HttpStatusCode.InternalServerError,
-                                        statusHint: "InternalServerError"
-                                    );
+                                    return _commandResult.InternalServerError();
                             }
                         }
 
-                            return new CommandResult<Unit>(
-                                statusCode: HttpStatusCode.NotFound,
-                                statusHint: "NotFound"
-                            );
+                            return _commandResult.NotFound();
                 }
         }
     }

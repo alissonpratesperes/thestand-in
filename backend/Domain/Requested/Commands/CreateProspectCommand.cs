@@ -4,7 +4,7 @@ using Domain.Shared.Results;
 using Domain.Shared.Commands;
 
     namespace Domain.Requested.Commands {
-        public class CreateProspectCommand : ICommand<CommandResult<Unit>> {
+        public class CreateProspectCommand : ICommand<ICommandResult<Unit>> {
             public string Name { get; set; }
             public decimal Goal { get; set; }
             public bool Active { get; set; }

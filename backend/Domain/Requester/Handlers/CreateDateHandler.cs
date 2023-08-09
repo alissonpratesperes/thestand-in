@@ -1,5 +1,4 @@
 using MediatR;
-using System.Net;
 
 using Domain.Shared.Data;
 using Domain.Shared.Results;
@@ -12,12 +11,14 @@ using Domain.Requester.Repositories;
         public class CreateDateHandler : IHandler<CreateDateCommand> {
             private readonly IDateRepository _dateRepository;
             private readonly IUnityOfWork _unityOfWork;
-            public CreateDateHandler(IDateRepository dateRepository, IUnityOfWork unityOfWork) {
+            private readonly ICommandResult<Unit> _commandResult;
+            public CreateDateHandler(IDateRepository dateRepository, IUnityOfWork unityOfWork, ICommandResult<Unit> commandResult) {
                 _dateRepository = dateRepository;
                 _unityOfWork = unityOfWork;
+                _commandResult = commandResult;
             }
 
-                public async Task<CommandResult<Unit>> Handle(CreateDateCommand request, CancellationToken cancellationToken) {
+                public async Task<ICommandResult<Unit>> Handle(CreateDateCommand request, CancellationToken cancellationToken) {
                     try {
                         var date = new Date(
                             name: request.Name,
@@ -36,17 +37,11 @@ using Domain.Requester.Repositories;
                             await _dateRepository.Create(date);
                             await _unityOfWork.Commit();
 
-                                return new CommandResult<Unit>(
-                                    statusCode: HttpStatusCode.Created,
-                                    statusHint: "Created"
-                                );
+                                return _commandResult.Created();
                     } catch (Exception) {
                         _unityOfWork.Rollback();
 
-                            return new CommandResult<Unit>(
-                                statusCode: HttpStatusCode.InternalServerError,
-                                statusHint: "InternalServerError"
-                            );
+                            return _commandResult.InternalServerError();
                     }
                 }
         }

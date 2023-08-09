@@ -5,7 +5,7 @@ using Domain.Shared.Commands;
 using Domain.Shared.Enumerators;
 
     namespace Domain.Requester.Commands {
-        public class CreateDateCommand : ICommand<CommandResult<Unit>> {
+        public class CreateDateCommand : ICommand<ICommandResult<Unit>> {
             public string Name { get; set; }
             public string Title { get; set; }
             public EStatus Status { get; set; }

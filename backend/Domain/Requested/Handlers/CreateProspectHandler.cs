@@ -1,5 +1,4 @@
 using MediatR;
-using System.Net;
 
 using Domain.Shared.Data;
 using Domain.Shared.Results;
@@ -12,12 +11,14 @@ using Domain.Requested.Repositories;
         public class CreateProspectHandler : IHandler<CreateProspectCommand> {
             private readonly IProspectRepository _prospectRepository;
             private readonly IUnityOfWork _unityOfWork;
-            public CreateProspectHandler(IProspectRepository prospectRepository, IUnityOfWork unityOfWork) {
+            private readonly ICommandResult<Unit> _commandResult;
+            public CreateProspectHandler(IProspectRepository prospectRepository, IUnityOfWork unityOfWork, ICommandResult<Unit> commandResult) {
                 _prospectRepository = prospectRepository;
                 _unityOfWork = unityOfWork;
+                _commandResult = commandResult;
             }
 
-                public async Task<CommandResult<Unit>> Handle(CreateProspectCommand request, CancellationToken cancellationToken) {
+                public async Task<ICommandResult<Unit>> Handle(CreateProspectCommand request, CancellationToken cancellationToken) {
                     try {
                         var prospect = new Prospect(
                             name: request.Name,
@@ -33,17 +34,11 @@ using Domain.Requested.Repositories;
                             await _prospectRepository.Create(prospect);
                             await _unityOfWork.Commit();
 
-                                return new CommandResult<Unit>(
-                                    statusCode: HttpStatusCode.Created,
-                                    statusHint: "Created"
-                                );
+                                return _commandResult.Created();
                     } catch (Exception) {
                         _unityOfWork.Rollback();
 
-                            return new CommandResult<Unit>(
-                                statusCode: HttpStatusCode.InternalServerError,
-                                statusHint: "InternalServerError"
-                            );
+                            return _commandResult.InternalServerError();
                     }
                 }
         }

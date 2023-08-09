@@ -14,15 +14,15 @@ using Domain.Requester.Commands;
             }
 
                 [HttpPost]
-                public async Task<CommandResult<Unit>> Create([FromBody] CreateDateCommand command)
+                public async Task<ICommandResult<Unit>> Create([FromBody] CreateDateCommand command)
                     =>  await _mediator.Send(command);
 
                 [HttpPut]
-                public async Task<CommandResult<Unit>> Update([FromBody] UpdateDateCommand command)
+                public async Task<ICommandResult<Unit>> Update([FromBody] UpdateDateCommand command)
                     =>  await _mediator.Send(command);
 
                 [HttpDelete]
-                public async Task<CommandResult<Unit>> Delete([FromQuery] DeleteDateCommand command)
+                public async Task<ICommandResult<Unit>> Delete([FromQuery] DeleteDateCommand command)
                     =>  await _mediator.Send(command);
         }
     }

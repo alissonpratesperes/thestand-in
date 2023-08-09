@@ -33,6 +33,7 @@ using Infrastructure.Extensions;
                             services.AddMediatR(cfg => { cfg.RegisterServicesFromAssembly(typeof(Entity).Assembly); });
                             services.AddAuthorization();
                             services.AddDatabase(configuration);
+                            services.AddResults<Unit>();
 
                                 ConfigureSwagger(services);
                     }

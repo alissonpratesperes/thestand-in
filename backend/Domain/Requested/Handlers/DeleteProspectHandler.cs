@@ -1,5 +1,4 @@
 using MediatR;
-using System.Net;
 
 using Domain.Shared.Data;
 using Domain.Shared.Results;
@@ -11,45 +10,35 @@ using Domain.Requested.Repositories;
         public class DeleteProspectHandler : IHandler<DeleteProspectCommand> {
             private readonly IProspectRepository _prospectRepository;
             private readonly IUnityOfWork _unityOfWork;
-            public DeleteProspectHandler(IProspectRepository prospectRepository, IUnityOfWork unityOfWork) {
+            private readonly ICommandResult<Unit> _commandResult;
+            public DeleteProspectHandler(IProspectRepository prospectRepository, IUnityOfWork unityOfWork, ICommandResult<Unit> commandResult) {
                 _prospectRepository = prospectRepository;
                 _unityOfWork = unityOfWork;
+                _commandResult = commandResult;
             }
 
-                public async Task<CommandResult<Unit>> Handle(DeleteProspectCommand request, CancellationToken cancellationToken) {
+                public async Task<ICommandResult<Unit>> Handle(DeleteProspectCommand request, CancellationToken cancellationToken) {
                     var prospect = await _prospectRepository.Read(request.Id);
 
                         if(prospect != null) {
                             try {
                                 if(prospect.Dates.Count > 0) {
-                                    return new CommandResult<Unit>(
-                                        statusCode: HttpStatusCode.BadRequest,
-                                        statusHint: "BadRequest"
-                                    );
+                                    return _commandResult.BadRequest();
                                 } else {
                                     _prospectRepository.Delete(prospect);
 
                                         await _unityOfWork.Commit();
 
-                                            return new CommandResult<Unit>(
-                                                statusCode: HttpStatusCode.NoContent,
-                                                statusHint: "NoContent"
-                                            );
+                                            return _commandResult.NoContent();
                                 }
                             } catch (Exception) {
                                 _unityOfWork.Rollback();
 
-                                    return new CommandResult<Unit>(
-                                        statusCode: HttpStatusCode.InternalServerError,
-                                        statusHint: "InternalServerError"
-                                    );
+                                    return _commandResult.InternalServerError();
                             }
                         }
 
-                            return new CommandResult<Unit>(
-                                statusCode: HttpStatusCode.NotFound,
-                                statusHint: "NotFound"
-                            );
+                            return _commandResult.NotFound();
                 }
         }
     }
