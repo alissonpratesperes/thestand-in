@@ -34,6 +34,7 @@ using Infrastructure.Extensions;
                             services.AddAuthorization();
                             services.AddDatabase(configuration);
                             services.AddResults<Unit>();
+                            services.AddStorage();
 
                                 ConfigureSwagger(services);
                     }

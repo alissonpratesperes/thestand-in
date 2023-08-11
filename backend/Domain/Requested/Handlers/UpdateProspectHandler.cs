@@ -3,6 +3,8 @@ using MediatR;
 using Domain.Shared.Data;
 using Domain.Shared.Results;
 using Domain.Shared.Handlers;
+using Domain.Shared.Services;
+using Domain.Shared.Extensions;
 using Domain.Shared.Enumerators;
 using Domain.Requested.Commands;
 using Domain.Requested.Repositories;
@@ -10,10 +12,12 @@ using Domain.Requested.Repositories;
     namespace Domain.Requested.Handlers {
         public class UpdateProspectHandler : IHandler<UpdateProspectCommand> {
             private readonly IProspectRepository _prospectRepository;
+            private readonly IPictureStorage _pictureStorage;
             private readonly IUnityOfWork _unityOfWork;
             private readonly ICommandResult<Unit> _commandResult;
-            public UpdateProspectHandler(IProspectRepository prospectRepository, IUnityOfWork unityOfWork, ICommandResult<Unit> commandResult) {
+            public UpdateProspectHandler(IProspectRepository prospectRepository, IPictureStorage pictureStorage, IUnityOfWork unityOfWork, ICommandResult<Unit> commandResult) {
                 _prospectRepository = prospectRepository;
+                _pictureStorage = pictureStorage;
                 _unityOfWork = unityOfWork;
                 _commandResult = commandResult;
             }
@@ -34,7 +38,8 @@ using Domain.Requested.Repositories;
                                         biography: request.Biography,
                                         available: request.Available,
                                         birth: request.Birth,
-                                        picture: request.Picture
+                                        picture:
+                                            await request.Picture.Store(_pictureStorage)
                                     );
 
                                         _prospectRepository.Update(prospect);
