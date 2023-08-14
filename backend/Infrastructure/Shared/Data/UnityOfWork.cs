@@ -13,5 +13,5 @@ using Infrastructure.Contexts;
 
                 public void Rollback()
                     =>  _context.Database.CurrentTransaction?.Rollback();
-        }    
+        }
     }
