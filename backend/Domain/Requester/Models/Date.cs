@@ -97,5 +97,10 @@ using Domain.Shared.ValueObjects;
                     ) {
                         this.Status = status;
                     }
+                    public void Refuse(
+                        EStatus status
+                    ) {
+                        this.Status = status;
+                    }
         }
     }

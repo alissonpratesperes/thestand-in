@@ -33,5 +33,9 @@ using Domain.Requester.Actions.Commands;
                 [HttpPut("finish")]
                 public async Task<ICommandResult<Unit>> Finish([FromQuery] FinishDateCommand action)
                     =>  await _mediator.Send(action);
+
+                [HttpPut("refuse")]
+                public async Task<ICommandResult<Unit>> Refuse([FromQuery] RefuseDateCommand action)
+                    =>  await _mediator.Send(action);
         }
     }
