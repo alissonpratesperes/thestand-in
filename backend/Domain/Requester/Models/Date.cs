@@ -62,6 +62,7 @@ using Domain.Shared.ValueObjects;
                         this.Contribution = contribution;
                         this.ProspectId = prospectId;
                     }
+
                     public void Update(
                         string name,
                         string title,
@@ -84,6 +85,12 @@ using Domain.Shared.ValueObjects;
                         this.Displacement = displacement;
                         this.Contribution = contribution;
                         this.ProspectId = prospectId;
+                    }
+
+                    public void Accept(
+                        EStatus status
+                    ) {
+                        this.Status = status;
                     }
         }
     }
