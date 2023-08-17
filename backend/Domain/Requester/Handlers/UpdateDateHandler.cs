@@ -3,6 +3,7 @@ using MediatR;
 using Domain.Shared.Data;
 using Domain.Shared.Results;
 using Domain.Shared.Handlers;
+using Domain.Shared.Extensions;
 using Domain.Shared.Enumerators;
 using Domain.Requester.Commands;
 using Domain.Requester.Repositories;
@@ -34,7 +35,8 @@ using Domain.Requester.Repositories;
                                         schedule: request.Schedule,
                                         location: request.Location,
                                         description: request.Description,
-                                        displacement: request.Displacement,
+                                        displacement:
+                                            Displacement.Choose(request.Displacement),
                                         contribution: request.Contribution,
                                         prospectId: request.ProspectId
                                     );
