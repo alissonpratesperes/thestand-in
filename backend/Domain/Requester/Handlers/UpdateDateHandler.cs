@@ -30,7 +30,8 @@ using Domain.Requester.Repositories;
                                     date.Update(
                                         name: request.Name,
                                         title: request.Title,
-                                        status: request.Status,
+                                        status:
+                                            Status.Select(request.Status),
                                         contact: request.Contact,
                                         schedule: request.Schedule,
                                         location: request.Location,
