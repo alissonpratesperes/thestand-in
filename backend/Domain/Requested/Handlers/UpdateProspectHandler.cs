@@ -33,10 +33,9 @@ using Domain.Requested.Repositories;
                                     prospect.Update(
                                         name: request.Name,
                                         goal: request.Goal,
-                                        active: request.Active,
                                         contact: request.Contact,
                                         biography: request.Biography,
-                                        available: request.Available,
+                                        status: request.Status,
                                         birth: request.Birth,
                                         picture:
                                             await request.Picture.Store(_pictureStorage)

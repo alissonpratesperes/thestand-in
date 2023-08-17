@@ -27,10 +27,9 @@ using Domain.Requested.Repositories;
                         var prospect = new Prospect(
                             name: request.Name,
                             goal: request.Goal,
-                            active: request.Active,
                             contact: request.Contact,
                             biography: request.Biography,
-                            available: request.Available,
+                            status: request.Status,
                             birth: request.Birth,
                             picture:
                                 await request.Picture.Store(_pictureStorage)
