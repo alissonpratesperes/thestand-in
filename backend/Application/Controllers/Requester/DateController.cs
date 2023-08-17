@@ -29,5 +29,9 @@ using Domain.Requester.Actions.Commands;
                 [HttpPut("accept")]
                 public async Task<ICommandResult<Unit>> Accept([FromQuery] AcceptDateCommand action)
                     =>  await _mediator.Send(action);
+
+                [HttpPut("finish")]
+                public async Task<ICommandResult<Unit>> Finish([FromQuery] FinishDateCommand action)
+                    =>  await _mediator.Send(action);
         }
     }

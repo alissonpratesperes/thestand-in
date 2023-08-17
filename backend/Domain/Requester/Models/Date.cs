@@ -92,5 +92,10 @@ using Domain.Shared.ValueObjects;
                     ) {
                         this.Status = status;
                     }
+                    public void Finish(
+                        EStatus status
+                    ) {
+                        this.Status = status;
+                    }
         }
     }
