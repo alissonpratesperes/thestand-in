@@ -3,8 +3,12 @@ using Microsoft.AspNetCore.Mvc;
 
 using Domain.Shared.Results;
 using Domain.Requested.Commands;
+using Domain.Shared.Returns;
+using Domain.Requested.ViewModels;
+using Domain.Shared.Paginations;
+using Domain.Requested.Queries;
 
-    namespace Application.Controllers.Requested {
+namespace Application.Controllers.Requested {
         [Route("v1/prospects")]
         [ApiController]
         public class ProspectController : ControllerBase {
@@ -24,5 +28,9 @@ using Domain.Requested.Commands;
                 [HttpDelete]
                 public async Task<ICommandResult<Unit>> Delete([FromQuery] DeleteProspectCommand command)
                     =>  await _mediator.Send(command);
+
+                [HttpGet]
+                public async Task<Return<Pagination<ListProspectViewModel>>> List([FromQuery] ListProspectQuery query)
+                    =>  await _mediator.Send(query);
         }
     }

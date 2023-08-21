@@ -37,6 +37,8 @@ using Infrastructure.Extensions;
                             services.AddStorage();
                             services.AddUnityOfWork();
                             services.AddResults<Unit>();
+                            services.AddSession(configuration);
+                            services.AddQueryRepository();
 
                                 ConfigureSwagger(services);
                     }
