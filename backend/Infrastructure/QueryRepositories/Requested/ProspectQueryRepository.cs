@@ -14,6 +14,7 @@ using Domain.Requested.QueryRepositories;
                 public async Task<IEnumerable<ListProspectViewModel>> List(int page, int length) {
                     var sql = @"
                         SELECT
+                            ""P"".""Id"",
                             ""P"".""Name"",
                             ""P"".""Goal"",
                             ""P"".""Status_Active"",
@@ -21,7 +22,9 @@ using Domain.Requested.QueryRepositories;
                             ""P"".""Biography"",
                             ""P"".""Status_Available"",
                             ""P"".""Birth"",
-                            ""P"".""Picture""
+                            ""P"".""Picture"",
+                            ""P"".""CreatedAt"",
+                            ""P"".""UpdatedAt""
                         FROM
                             ""Prospects"" AS ""P""
                         ORDER BY
@@ -38,7 +41,6 @@ using Domain.Requested.QueryRepositories;
 
                         return prospects;
                 }
-
                 public async Task<int> Count() {
                     var sql = @"
                         SELECT

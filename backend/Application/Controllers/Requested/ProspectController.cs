@@ -2,13 +2,13 @@ using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
 using Domain.Shared.Results;
-using Domain.Requested.Commands;
 using Domain.Shared.Returns;
-using Domain.Requested.ViewModels;
 using Domain.Shared.Paginations;
 using Domain.Requested.Queries;
+using Domain.Requested.Commands;
+using Domain.Requested.ViewModels;
 
-namespace Application.Controllers.Requested {
+    namespace Application.Controllers.Requested {
         [Route("v1/prospects")]
         [ApiController]
         public class ProspectController : ControllerBase {
