@@ -17,14 +17,15 @@ using Domain.Requested.QueryRepositories;
                             ""P"".""Id"",
                             ""P"".""Name"",
                             ""P"".""Goal"",
-                            ""P"".""Status_Active"",
                             ""P"".""Contact"",
                             ""P"".""Biography"",
-                            ""P"".""Status_Available"",
                             ""P"".""Birth"",
                             ""P"".""Picture"",
                             ""P"".""CreatedAt"",
-                            ""P"".""UpdatedAt""
+                            ""P"".""UpdatedAt"",
+
+                            ""P"".""Status_Active"" AS ""Active"",
+                            ""P"".""Status_Available"" AS ""Available""
                         FROM
                             ""Prospects"" AS ""P""
                         ORDER BY
@@ -34,10 +35,16 @@ using Domain.Requested.QueryRepositories;
                         OFFSET
                             @Offset
                     ";
-                    var prospects = await _session.Connection.QueryAsync<ListProspectViewModel>(sql, new {
+                    var prospects = await _session.Connection.QueryAsync<ListProspectViewModel, StatusViewModel, ListProspectViewModel>(sql, (prospect, status) => {
+                        prospect.Status = status;
+
+                            return prospect;
+                    }, new {
                         Length = length,
                         Offset = (page - 1) * length
-                    });
+                    },
+                        splitOn: "Active"
+                    );
 
                         return prospects;
                 }
