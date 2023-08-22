@@ -2,7 +2,11 @@ using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
 using Domain.Shared.Results;
+using Domain.Shared.Returns;
+using Domain.Shared.Paginations;
+using Domain.Requester.Queries;
 using Domain.Requester.Commands;
+using Domain.Requester.ViewModels;
 using Domain.Requester.Actions.Commands;
 
     namespace Application.Controllers.Requester {
@@ -37,5 +41,9 @@ using Domain.Requester.Actions.Commands;
                 [HttpPut("refuse")]
                 public async Task<ICommandResult<Unit>> Refuse([FromQuery] RefuseDateCommand action)
                     =>  await _mediator.Send(action);
+
+                [HttpGet]
+                public async Task<Return<Pagination<ListDateViewModel>>> List([FromQuery] ListDateQuery query)
+                    =>  await _mediator.Send(query);
         }
     }

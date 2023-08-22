@@ -1,7 +1,9 @@
 using Microsoft.Extensions.DependencyInjection;
 
 using Domain.Requested.QueryRepositories;
+using Domain.Requester.QueryRepositories;
 using Infrastructure.QueryRepositories.Requested;
+using Infrastructure.QueryRepositories.Requester;
 
     namespace Infrastructure.Extensions {
         public static class QueryRepository {
@@ -13,6 +15,7 @@ using Infrastructure.QueryRepositories.Requested;
 
                 private static void AddQueryableRepositories(IServiceCollection services) {
                     services.AddTransient<IProspectQueryRepository, ProspectQueryRepository>();
+                    services.AddTransient<IDateQueryRepository, DateQueryRepository>();
                 }
         }
     }
