@@ -8,8 +8,7 @@ using Domain.Shared.Enumerators;
             public EStatus Status { get; set; }
             public string Contact { get; set; }
             public DateTime Schedule { get; set; }
-            public string Latitude { get; set; }
-            public string Longitude { get; set; }
+            public CoordinateViewModel Location { get; set; }
             public string Description { get; set; }
             public EDisplacement Displacement { get; set; }
             public decimal Contribution { get; set; }

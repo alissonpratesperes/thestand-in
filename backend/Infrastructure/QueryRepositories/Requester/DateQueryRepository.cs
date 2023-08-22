@@ -20,13 +20,14 @@ using Domain.Requester.QueryRepositories;
                             ""D"".""Status"",
                             ""D"".""Contact"",
                             ""D"".""Schedule"",
-                            ""D"".""Location_Latitude"" AS ""Latitude"",
-                            ""D"".""Location_Longitude"" AS ""Longitude"",
                             ""D"".""Description"",
                             ""D"".""Displacement"",
                             ""D"".""Contribution"",
                             ""D"".""CreatedAt"",
-                            ""D"".""UpdatedAt""
+                            ""D"".""UpdatedAt"",
+                            
+                            ""D"".""Location_Latitude"" AS ""Latitude"",
+                            ""D"".""Location_Longitude"" AS ""Longitude""
                         FROM
                             ""Dates"" AS ""D""
                         ORDER BY
@@ -36,10 +37,16 @@ using Domain.Requester.QueryRepositories;
                         OFFSET
                             @Offset
                     ";
-                    var dates = await _session.Connection.QueryAsync<ListDateViewModel>(sql, new {
+                    var dates = await _session.Connection.QueryAsync<ListDateViewModel, CoordinateViewModel, ListDateViewModel>(sql, (date, coordinate) => {
+                        date.Location = coordinate;
+
+                            return date;
+                    }, new {
                         Length = length,
                         Offset = (page - 1) * length
-                    });
+                    },
+                        splitOn: "Latitude"
+                    );
 
                         return dates;
                 }
