@@ -12,7 +12,7 @@ using Domain.Requested.QueryRepositories;
                 _session = session;
             }
 
-                public async Task<IEnumerable<ListProspectViewModel>> List(int page, int length) {
+                public async Task<IEnumerable<ListProspectViewModel>> List(int page, int length, string? search) {
                     var sql = @"
                         SELECT
                             ""P"".""Id"",
@@ -29,6 +29,8 @@ using Domain.Requested.QueryRepositories;
                             ""P"".""Status_Available"" AS ""Available""
                         FROM
                             ""Prospects"" AS ""P""
+                        WHERE
+                            ""P"".""Name"" LIKE @Search COLLATE NOCASE
                         ORDER BY
                             ""P"".""Name""
                         LIMIT
@@ -42,21 +44,26 @@ using Domain.Requested.QueryRepositories;
                             return prospect;
                     }, new {
                         Length = length,
-                        Offset = (page - 1) * length
+                        Offset = (page - 1) * length,
+                        Search = "%" + (search != null ? search.Replace(' ', '%') : "") + "%"
                     },
                         splitOn: "Active"
                     );
 
                         return prospects;
                 }
-                public async Task<int> Count() {
+                public async Task<int> Count(string? search) {
                     var sql = @"
                         SELECT
                             COUNT(*)
                         FROM
                             ""Prospects"" AS ""P""
+                        WHERE
+                            ""P"".""Name"" LIKE @Search COLLATE NOCASE
                     ";
-                    var prospects = await _session.Connection.ExecuteScalarAsync<int>(sql);
+                    var prospects = await _session.Connection.ExecuteScalarAsync<int>(sql, new {
+                        Search = "%" + (search != null ? search.Replace(' ', '%') : "") + "%"
+                    });
 
                         return prospects;
                 }

@@ -13,8 +13,8 @@ using Domain.Requested.QueryRepositories;
             }
 
                 public async Task<Return<Pagination<ListProspectViewModel>>> Handle(ListProspectQuery query, CancellationToken cancellationToken) {
-                    var results = await _prospectQueryRepository.List(query.Page, query.Length);
-                    var count = await _prospectQueryRepository.Count();
+                    var results = await _prospectQueryRepository.List(query.Page, query.Length, query.Search);
+                    var count = await _prospectQueryRepository.Count(query.Search);
                     var pagination = new Pagination<ListProspectViewModel>(
                         count: count,
                         page: query.Page,

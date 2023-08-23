@@ -7,5 +7,6 @@ using Domain.Requested.ViewModels;
         public class ListProspectQuery : IQuery<Return<Pagination<ListProspectViewModel>>> {
             public int Page { get; set; } = 1;
             public int Length { get; set; } = 1;
+            public string? Search { get; set; }
         }
     }
