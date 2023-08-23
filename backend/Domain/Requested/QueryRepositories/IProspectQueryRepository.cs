@@ -4,5 +4,6 @@ using Domain.Requested.ViewModels;
         public interface IProspectQueryRepository {
             Task<IEnumerable<ListProspectViewModel>> List(int page, int length);
             Task<int> Count();
+            Task<GetProspectViewModel> Get(Guid id);
         }
     }

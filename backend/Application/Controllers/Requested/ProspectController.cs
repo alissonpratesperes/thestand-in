@@ -32,5 +32,9 @@ using Domain.Requested.ViewModels;
                 [HttpGet]
                 public async Task<Return<Pagination<ListProspectViewModel>>> List([FromQuery] ListProspectQuery query)
                     =>  await _mediator.Send(query);
+
+                [HttpGet("{id}")]
+                public async Task<Return<GetProspectViewModel>> Get([FromRoute] GetProspectQuery query)
+                    =>  await _mediator.Send(query);
         }
     }
