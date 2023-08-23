@@ -45,5 +45,9 @@ using Domain.Requester.Actions.Commands;
                 [HttpGet]
                 public async Task<Return<Pagination<ListDateViewModel>>> List([FromQuery] ListDateQuery query)
                     =>  await _mediator.Send(query);
+
+                [HttpGet("{id}")]
+                public async Task<Return<GetDateViewModel>> Get([FromRoute] GetDateQuery query)
+                    =>  await _mediator.Send(query);
         }
     }

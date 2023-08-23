@@ -4,5 +4,6 @@ using Domain.Requester.ViewModels;
         public interface IDateQueryRepository {
             Task<IEnumerable<ListDateViewModel>> List(int page, int length);
             Task<int> Count();
+            Task<GetDateViewModel> Get(Guid id);
         }
     }
