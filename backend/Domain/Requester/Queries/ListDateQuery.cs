@@ -7,5 +7,6 @@ using Domain.Requester.ViewModels;
         public class ListDateQuery : IQuery<Return<Pagination<ListDateViewModel>>> {
             public int Page { get; set; } = 1;
             public int Length { get; set; } = 1;
+            public int? Status { get; set; } = 0;
         }
     }

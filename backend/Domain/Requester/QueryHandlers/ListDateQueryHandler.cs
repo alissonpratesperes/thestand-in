@@ -13,8 +13,8 @@ using Domain.Requester.QueryRepositories;
             }
 
                 public async Task<Return<Pagination<ListDateViewModel>>> Handle(ListDateQuery query, CancellationToken cancellationToken) {
-                    var results = await _dateQueryRepository.List(query.Page, query.Length);
-                    var count = await _dateQueryRepository.Count();
+                    var results = await _dateQueryRepository.List(query.Page, query.Length, query.Status);
+                    var count = await _dateQueryRepository.Count(query.Status);
                     var pagination = new Pagination<ListDateViewModel>(
                         count: count,
                         page: query.Page,

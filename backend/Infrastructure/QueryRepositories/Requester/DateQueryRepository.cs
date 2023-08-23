@@ -12,7 +12,7 @@ using Domain.Requester.QueryRepositories;
                 _session = session;
             }
 
-                public async Task<IEnumerable<ListDateViewModel>> List(int page, int length) {
+                public async Task<IEnumerable<ListDateViewModel>> List(int page, int length, int? status) {
                     var sql = @"
                         SELECT
                             ""D"".""Id"",
@@ -31,6 +31,8 @@ using Domain.Requester.QueryRepositories;
                             ""D"".""Location_Longitude"" AS ""Longitude""
                         FROM
                             ""Dates"" AS ""D""
+                        WHERE
+                            ""D"".""Status"" = @Status
                         ORDER BY
                             ""D"".""Name""
                         LIMIT
@@ -44,21 +46,26 @@ using Domain.Requester.QueryRepositories;
                             return date;
                     }, new {
                         Length = length,
-                        Offset = (page - 1) * length
+                        Offset = (page - 1) * length,
+                        Status = status
                     },
                         splitOn: "Latitude"
                     );
 
                         return dates;
                 }
-                public async Task<int> Count() {
+                public async Task<int> Count(int? status) {
                     var sql = @"
                         SELECT
                             COUNT(*)
                         FROM
                             ""Dates"" AS ""D""
+                        WHERE
+                            ""D"".""Status"" = @Status
                     ";
-                    var dates = await _session.Connection.ExecuteScalarAsync<int>(sql);
+                    var dates = await _session.Connection.ExecuteScalarAsync<int>(sql, new {
+                        Status = status
+                    });
 
                         return dates;
                 }
