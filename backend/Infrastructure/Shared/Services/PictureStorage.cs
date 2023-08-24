@@ -13,7 +13,7 @@ using Domain.Shared.Services;
                 public async Task<string> Store(string? base64) {
                     byte[] picture = Convert.FromBase64String(base64.Split(',')[1]);
                     string name = Guid.NewGuid().ToString() + "." + GetExtension(base64);
-                    string path = Path.Combine(_hostingEnvironment.ContentRootPath, "Pictures", name);
+                    string path = Path.Combine(_hostingEnvironment.ContentRootPath, "wwwroot/pictures", name);
 
                         using (var stream = new FileStream(path, FileMode.Create)) {
                             await stream.WriteAsync(picture, 0, picture.Length);
