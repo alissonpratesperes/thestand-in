@@ -39,6 +39,7 @@ using Infrastructure.Extensions;
                             services.AddResults<Unit>();
                             services.AddSession(configuration);
                             services.AddQueryRepository();
+                            services.AddMemoryCache();
 
                                 ConfigureSwagger(services);
                     }
