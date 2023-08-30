@@ -21,12 +21,14 @@ using Infrastructure.Extensions;
             }
 
                 app.UseStaticFiles();
+                app.UseCors("AllowAll");
                 app.MapControllers();
                 app.Run();
 
                     void ConfigureServices(IServiceCollection services) {
                         IConfiguration configuration = builder.Configuration;
 
+                            services.AddCors(options => { options.AddPolicy("AllowAll", builder => { builder.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin(); }); });
                             services.AddControllers();
                             services.AddEndpointsApiExplorer();
                             services.AddSwaggerGen();
