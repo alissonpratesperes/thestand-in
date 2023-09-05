@@ -17,8 +17,8 @@ using Domain.Requester.QueryRepositories;
             }
 
                 public async Task<Return<Pagination<ListDateViewModel>>> Handle(ListDateQuery query, CancellationToken cancellationToken) {
-                    var cacheKey = $"ListOfDate_{query.Status}_{query.Page}_{query.Length}";
-                    var cachedResults = await _memoryCache.GetOrCreate(cacheKey, async entry => {
+                    var cachedKey = $"ListDate_{query.Page}_{query.Length}_{query.Status}";
+                    var cachedResults = await _memoryCache.GetOrCreate(cachedKey, async entry => {
                         entry.AbsoluteExpirationRelativeToNow = TimeSpan.FromMinutes(15);
 
                             var results = await _dateQueryRepository.List(query.Page, query.Length, query.Status);
@@ -35,7 +35,7 @@ using Domain.Requester.QueryRepositories;
                                     :  Return<Pagination<ListDateViewModel>>.Failure(pagination);
                     });
 
-                        return cachedResults;        
+                        return cachedResults;
                 }
         }
     }

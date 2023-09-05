@@ -16,7 +16,8 @@ using Domain.Requester.QueryRepositories;
             }
 
                 public async Task<Return<GetDateViewModel>> Handle(GetDateQuery query, CancellationToken cancellationToken) {
-                    var cachedResult = await _memoryCache.GetOrCreate("GetOfDate", async entry => {
+                    var cachedKey = $"GetDate_{query.Id}";
+                    var cachedResult = await _memoryCache.GetOrCreate(cachedKey, async entry => {
                         entry.AbsoluteExpirationRelativeToNow = TimeSpan.FromMinutes(5);
 
                             var date = await _dateQueryRepository.Get(query.Id);
@@ -26,7 +27,7 @@ using Domain.Requester.QueryRepositories;
                                     :  Return<GetDateViewModel>.Failure(date);
                     });
 
-                        return cachedResult;      
+                        return cachedResult;
                 }
         }
     }

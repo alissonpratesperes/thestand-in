@@ -17,8 +17,8 @@ using Domain.Requested.QueryRepositories;
             }
 
                 public async Task<Return<Pagination<ListProspectViewModel>>> Handle(ListProspectQuery query, CancellationToken cancellationToken) {
-                    var cacheKey = $"ListOfProspect_{query.Search}_{query.Page}_{query.Length}";
-                    var cachedResults = await _memoryCache.GetOrCreate(cacheKey, async entry => {
+                    var cachedKey = $"ListProspect_{query.Page}_{query.Length}_{query.Search}";
+                    var cachedResults = await _memoryCache.GetOrCreate(cachedKey, async entry => {
                         entry.AbsoluteExpirationRelativeToNow = TimeSpan.FromMinutes(15);
 
                             var results = await _prospectQueryRepository.List(query.Page, query.Length, query.Search);

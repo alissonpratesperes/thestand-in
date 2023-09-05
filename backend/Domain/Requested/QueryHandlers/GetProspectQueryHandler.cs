@@ -16,7 +16,8 @@ using Domain.Requested.QueryRepositories;
             }
 
                 public async Task<Return<GetProspectViewModel>> Handle(GetProspectQuery query, CancellationToken cancellationToken) {
-                    var cachedResult = await _memoryCache.GetOrCreate("GetOfProspect", async entry => {
+                    var cachedKey = $"GetProspect_{query.Id}";
+                    var cachedResult = await _memoryCache.GetOrCreate(cachedKey, async entry => {
                         entry.AbsoluteExpirationRelativeToNow = TimeSpan.FromMinutes(5);
 
                             var prospect = await _prospectQueryRepository.Get(query.Id);
