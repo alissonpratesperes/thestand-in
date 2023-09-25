@@ -36,6 +36,7 @@ Essa Aplicação foi desenvolvida utilizando as seguintes tecnologias:
 - <a href="https://swagger.io/">Swagger</a>
 
 ## :electric_plug: Execute
+
    - Clonar o Repositório:
         |- Acessar o diretório da camada 'Application' com o Comando: "cd backend/Application";
             >_ Inicializar o Back-End com o Comando: "dotnet <watch?> run".
