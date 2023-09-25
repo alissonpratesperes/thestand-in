@@ -40,8 +40,7 @@ Essa Aplicação foi desenvolvida utilizando as seguintes tecnologias:
 
     - Clonar o Repositório:
     - Acessar o diretório da camada 'Application' com o Comando: "cd backend/Application":
-        |- Criar o Banco de Dados com o Comando: "npm run knex:migrate";
-            >_ Inicializar o Back-End com o Comando: "dotnet <watch?> run".
+        >_ Inicializar o Back-End com o Comando: "dotnet <watch?> run".
 
 ## :fuelpump: Autor
 Este Projeto foi desenhado e desenvolvido de forma autônoma, a fim de ser um "**trabalho de conclusão de curso**" próprio e personalizado, e com o objetivo de constituir uma POC, ou seja, uma Prova de Conceito da implementação de todas as técnicas e conceitos abordados durante a formação, portanto constitui-se neste repositório, apenas a camada de Back-End propriamente dita. Mediante a finalização do Curso **.NET Back-End Developer** do <a href="https://balta.io/">André Baltieri</a>, realizado em **Outubro de 2022**.
