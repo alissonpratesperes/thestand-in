@@ -20,3 +20,8 @@ ___
     <a href="#fuelpump-autor">Autor</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
     <a href="#memo-licença">Licença</a>
 </p>
+    <br/>
+
+## :dart: Sobre
+
+A **The Stand-in** é uma Aplicação envolvendo uma plataforma de encontros online, *que foi inspirada no filme: O Date Perfeito*, que ajuda pessoas a encontrarem seus Dates Perfeitos online.
