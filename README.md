@@ -23,5 +23,14 @@ ___
     <br/>
 
 ## :dart: Sobre
+A **The Stand-in** é uma Aplicação envolvendo uma plataforma de encontros online, *que foi inspirada no filme: O Date Perfeito*, e que ajuda pessoas a encontrarem seus Dates Perfeitos online.
 
-A **The Stand-in** é uma Aplicação envolvendo uma plataforma de encontros online, *que foi inspirada no filme: O Date Perfeito*, que ajuda pessoas a encontrarem seus Dates Perfeitos online.
+## :battery: Tecnologias
+Essa Aplicação foi desenvolvida utilizando as seguintes tecnologias:
+
+- <a href="https://insomnia.rest/">Insomnia</a>
+- <a href="https://learn.microsoft.com/en-us/ef/">Microsoft Entity Framework Core</a>
+- <a href="https://sqlite.org/">SQLite 3</a>
+- <a href="https://dotnet.microsoft.com/en-us/">Microsoft .NET</a>
+- <a href="https://dotnet.microsoft.com/en-us/apps/aspnet/web-apps/">C#</a>
+- <a href="https://swagger.io/">Swagger</a>
