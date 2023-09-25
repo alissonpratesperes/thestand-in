@@ -36,7 +36,7 @@ Essa Aplicação foi desenvolvida utilizando as seguintes tecnologias:
 - <a href="https://swagger.io/">Swagger</a>
 
 ## :fuelpump: Autor
-Este Projeto foi desenhado e desenvolvido de forma autônoma, a fim de ser um "**trabalho de conclusão de curso**" próprio, mediante a finalização do Curso **.NET Back-End Developer** do <a href="https://balta.io/">André Baltieri</a>, realizado em **Outubro de 2022**.
+Este Projeto foi desenhado e desenvolvido de forma autônoma, a fim de ser um "**trabalho de conclusão de curso**" próprio e personalizado, e com o objetivo de constituir uma POC, ou seja, uma Prova de Conceito da implementação de todos as técnicas e conceitos abordados durante a formação, portanto constitui-se neste repositório, apenas a camada de Back-End propriamente dita. Mediante a finalização do Curso **.NET Back-End Developer** do <a href="https://balta.io/">André Baltieri</a>, realizado em **Outubro de 2022**.
 
 ## :memo: Licença
 Esse projeto está sob a **Licença MIT**. Veja o arquivo [LICENSE](https://github.com/alissonpratesperes/thestand-in/blob/main/LICENSE) para mais detalhes.
