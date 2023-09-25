@@ -1,0 +1,124 @@
+COMPLETION OF COURSE PROJECT | C# .NET Back-End Developer | André Baltieri - Balta.io | DONE: true
+
+THESTAND-IN {
+	"title": "The Stand-in: Find your perfect date.",
+	"goal": "Development of an App, with the concepts covered in the course, and easy for anyone to interact with.",
+	"back-end": "With only one command to run it, the App must be started completely, without any other interaction.",
+	"tables": [
+		Prospect {
+			Description: "Who will attend the requested Dates."
+
+			"Name", ===================================> |Brooks Rattigan| <string>
+			"Goal", ===================================> |500| <decimal>
+			"Contact", ================================> |+5554991768785| <string>
+			"Biography", ==============================> |Pobretão de Breachport, querendo dinheiro pra faculdade| <string>
+			"Situation": <ValueObject> {
+				"Active", =========================> |True| <boolean>
+				"Available" =======================> |True| <boolean>
+			},
+			"Date of Birth", ==========================> |1994-05-06| <dateonly>
+			"ProfilePicture": {
+				Extension Method for Upload =======> |Photo01.jpg| <base 64 | string>
+			},
+
+				"Dates" ===========================> List<IReadOnlyCollection<Date>>
+
+			Commands: Create, Read, Update, Delete
+			Queries: List, Get
+		},
+		Date {
+			Description: "Who will request the Dates to the Prospects."
+
+			"Name", ==============================> |Celia Lieberman| <string>
+			"Title", =============================> |Companhia pra festa da Shelby| <string>
+			"Status": <ExtensionMethod>, =========> |Requested| <enumerator| EStatus>
+			"Contact", ===========================> |+5554991768785| <string>
+			"Schedule", ==========================> |2023-06-16T19:30:00| <datetime>
+			"Location": <ValueObject> {
+				"Latitude", ==================> |28.9669647| <string>
+				"Longitude" ==================> |51.0436304| <string>
+			},
+			"Description", =======================> |Festa da Shelby, para eu conversar com o Frank| <string>
+			"Displacement": <ExtensionMethod>, ===> |Me pegue| <enumerator| EDisplacement>
+			"Contribution", ==================> |500| <decimal>
+
+				"ProspectId" =================> |Brooks Rattigan| <string>
+
+			Commands: Create, Read, Update, Delete
+			Actions: Request, Accept, Finish, Refuse
+			Queries: List, Get
+		}
+	],
+	"enumerators": [
+		EDisplacement {
+			"Need", =======> Needs a ride
+			"Give", =======> Gives a ride
+			"Outer" =======> We both meet
+
+				Extension Method: Displacement
+		},
+		EStatus {
+			"Requested", ==> Waiting to be accepted
+			"Happening", ==> Running after accepted
+			"Completed", ==> Finished by a Prospect
+			"Declined" ====> Declined by a Prospect
+
+				Extension Method: Status
+		}
+	],
+	"validations": [
+		Prospect {
+			"Update", => prospect.Dates.Count(d => d.Status == EStatus.Requested) > 0
+			"Delete" ======================================> prospect.Dates.Count > 0
+		},
+		Date {
+			"Create", =============================> prospect.Status.Available = true
+			"Update", =============================> date.Status != EStatus.Requested
+			"Delete" ==============================> date.Status != EStatus.Requested
+		}
+	],
+	"improvements": [
+		{ "Os Commands e Handlers base devem ser Interfaces sendo implementadas em outros." },
+		{ "Deve ser implementado o Rollback para o Banco de Dados das Exceptions lançadas." },
+		{ "Try/Catch Blocks devem implementar Rollbacks nos Handlers para operações deles." },
+		{ "Todo Serviço é registrado na Classe 'Program.cs' separado em Extension Methods." },
+		{ "Os resultados dos 'Commands' devem ser padronizados seguindo Extension Methods." },
+		{ "Os Uploads das Pictures dos Prospects são padronizados pelos Extension Methods." },
+		{ "Será implementado um Value Object pelo menos numa Propriedade destas Entidades." },
+		{ "Deverá ser implementados os Extension Methods em todos Enumeradores principais." },
+		{ "Deverá ser implementada a Paginação dos Dados de ViewModels distintas Get/List." },
+		{ "No List/Get das Entidades, ViewModels serão implementadas tipo os ValueObjects." },
+		{ "Será implementada a filtragem em pelo menos uma Propriedade das duas Entidades." }
+	],
+	"obligations": [
+		{ "Inicializar o repositório no GitHub, deverá seguir o padrão Monolito." },
+		{ "Os Commits deverão possuir assertividade evitando redundâncias neles." },
+		{ "Documentar commits, o repositório servirá para anotações e consultas." },
+		{ "O Inglês será o idioma padrão, tanto para Código como para Interface." },
+		{ "A API toda deve ter todos os endpoints documentados tecnicizadamente." },
+		{ "Implementar o README documental da Aplicação, após o desenvolvimento." }
+	],
+	"responsabilities": [
+		{ "stack": "backend", "task": "Receber e tratar todas requisições acontecidas." },
+		{ "stack": "database", "task": "Acumular e relacionar todos registros criados." }
+	],
+	"patterns": [
+		{ "CQRS Sample, como padrão de projeto segmentando Comandos | Consultas." },
+		{ "Code First, database será gerado e atualizado através das Migrations." },
+		{ "O Banco de Dados deverá ser migrado de forma autônoma pela aplicação." },
+		{ "Padronização das requisições será feita usando implementação MediaTR." },
+		{ "Interfaces ICommand, IHandler abstraídas para uso do MediaTR Pattern." },
+		{ "Interfaces IQuery, IQueryHandler abstraídas para uso MediaTR Pattern." },
+		{ "ViewModel GET diferirá das ViewModel List, devido à cargas dos dados." },
+		{ "As Pictures dos Prospects servidas estaticamente na URL dos Browsers." },
+		{ "Implementar Caching para a camada das Queries para as duas Entidades." }
+	],
+	"technologies": [
+		{ "stack": "backend",  "language": "C#",   "framework": "dotNET" },
+		{ "stack": "database", "language": "SQL",  "framework": "SQLite" }
+	],
+	"deliveries": [
+		{ "stack": "back-end", "prioridade": 0 },
+		{ "stack": "database", "prioridade": 1 }
+	]
+}
