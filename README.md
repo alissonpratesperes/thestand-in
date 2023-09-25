@@ -40,3 +40,7 @@ Este Projeto foi desenhado e desenvolvido de forma autônoma, a fim de ser um "*
 
 ## :memo: Licença
 Esse projeto está sob a **Licença MIT**. Veja o arquivo [LICENSE](https://github.com/alissonpratesperes/thestand-in/blob/main/LICENSE) para mais detalhes.
+
+___
+
+<h5 align="center">👨🏻‍💻&nbsp;com&nbsp;💜&nbsp;por&nbsp;<a href="https://github.com/alissonpratesperes">Alisson Prates Peres</a>&nbsp;✌🏻😗</h5>
