@@ -35,10 +35,12 @@ Essa Aplicação foi desenvolvida utilizando as seguintes tecnologias:
 - <a href="https://dotnet.microsoft.com/en-us/apps/aspnet/web-apps/">C#</a>
 - <a href="https://swagger.io/">Swagger</a>
 
+
 ## :electric_plug: Execute
 
-   - Clonar o Repositório:
-        |- Acessar o diretório da camada 'Application' com o Comando: "cd backend/Application";
+    - Clonar o Repositório:
+    - Acessar o diretório da camada 'Application' com o Comando: "cd backend/Application":
+        |- Criar o Banco de Dados com o Comando: "npm run knex:migrate";
             >_ Inicializar o Back-End com o Comando: "dotnet <watch?> run".
 
 ## :fuelpump: Autor
