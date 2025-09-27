@@ -1,0 +1,233 @@
+PROJECT'S PROPOSAL: Refactoring | STACK: Back-End, Front-End, Mobile | DEVELOPER: Alisson Prates Peres | [ repository's hash ] Done: true
+
+THE STAND-IN | Find your perfect date
+{
+	headline : name
+	{
+		THE STAND-IN | Find your perfect date
+	},
+
+	objective : idea
+	{
+		Development of a new Application (but refactoring the old one with the same approach), with the aim to apply all the news 		learned concepts since then, as well to implement a most clean, modern and powerful structure using the best of C# dotNET
+		of Microsoft for the Back-End, as well to implement Front-End and Mobile stacks using the best good practices as possible 		to make an end-to-end completed solution for this case.
+	},
+
+	constraint : documentation
+	{
+		R E P O S I T O R Y  ___________________________________________________________________________________________________
+			[ ] The Github repository must follow the Monolith pattern approach
+			[ ] The Commits in repository must be assertive and well documented
+			[ ] The Commits will be sent with no Title and Body, to rush up all
+			[ ] As above, the document constraints will has the Commit's hashes
+			[ ] For Commits without Title and Body, must to be use Github's CLI
+		___________________________________________________________________________________________  I M P L E M E N T A T I O N
+
+		L A N G U A G E  _______________________________________________________________________________________________________
+			[ ] The English must be the only idiom for code n its documentation
+			[ ] The README must be implemented after the end of the development
+		_____________________________________________________________________________________________  P A D R O N I Z A T I O N
+	},
+
+	stack : technology
+	{
+		C #  ,  . N E T  C O R E  ______________________________________________________________________________________________
+			[ ] With only one command to run it, this Application must be started completely, without any other interaction
+		_____________________________________________________________________________________________________  B A C K  -  E N D
+
+		E N T I T Y  F R A M E W O R K  C O R E  ,  D A P P E R  _______________________________________________________________
+			[ ] Must be used these technologies to write and read flows for the Application's data stored into the database
+		_______________________________________________________________________  O B J E C T  R E L A T I O N A L  M A P P I N G
+
+		S Q L I T E  ___________________________________________________________________________________________________________
+			[ ] Must be serve to storage all the data of Application through a most powerful, stable than the previous used
+		_______________________________________________________________________________________________________  D A T A B A S E
+
+		R E A C T  J S  ________________________________________________________________________________________________________
+			[ ] Must be serve to offer one of the ways of Application's interaction flow, through this technology on the PC
+		___________________________________________________________________________________________________  F R O N T  -  E N D
+
+		R E A C T  N A T I V E  ,  E X P O  ____________________________________________________________________________________
+			[ ] Must be serve to offer one of the ways of Application's interaction flow, through this technology on the SM
+		___________________________________________________________________________________________________________  M O B I L E
+	},
+
+	architecture : pattern
+	{
+		D E S I G N  ___________________________________________________________________________________________________________
+		[ ] Must be developed with the implementation of: Code C based indentation activatin this resource inside code's editors
+		[ ] Must be developed with the implementation of: Swagger Framework to technically document all developed Apps endpoints
+		[ ] Must be developed with the implementation of: A CQRS (Command Query Responsibility Segregation) Pattern architecture
+		[ ] Must be developed with the implementation of: A Clean Architecture implementation united to the pattern above for it
+		[ ] Must be developed with the implementation of: Domain will contain the Classes with specific Methods for these Entity
+		[ ] Must be developed with the implementation of: Domain will contain Interfaces with specific Methods for Write or Read
+		[ ] Must be developed with the implementation of: Infrastructure will contain the implementations of all this Interfaces
+		[ ] Must be developed with the implementation of: MEF Core's layer will contain the mappings to the Entity relationships
+		[ ] Must be developed with the implementation of: Initiation of the database and run all migrations in Extension Methods
+		[ ] Must be developed with the implementation of: MEF Core will register and link Repositories to Interfaces as services
+		[ ] Must be developed with the implementation of: MSDapper will register and link Repositories to Interfaces as services
+		[ ] Must be developed with the implementation of: Extension Methods will link writable repos to its Interfaces of Domain
+		[ ] Must be developed with the implementation of: Extension Methods will link queryable repos to it Interfaces of Domain
+		[ ] Must be developed with the implementation of: Code First with the use of Migrations for generate the database schema
+		[ ] Must be developed with the implementation of: For the Entities, must the use Value Objects for organize informations 
+		[ ] Must be developed with the implementation of: One-To-One MEF Core's relationship between one or more of the entities
+		[ ] Must be developed with the implementation of: One-To-Many EF Core's relationship between one or more of the entities
+		[ ] Must be developed with the implementation of: Dependency Injection pattern for all through specific Extension Method
+		[ ] Must be developed with the implementation of: All content media that will be uploaded, will to use Extension Methods
+		[ ] Must be developed with the implementation of: All content media will be served through implemented Extension Methods
+		_________________________________________________________________________________________  I M P L E M E N T A T I O N S
+
+		W R I T E  _____________________________________________________________________________________________________________
+		[ ] Must be developed with the implementation of: Specific infrastructure layer, that will utilize Entity Framework Core
+		[ ] Must be developed with the implementation of: Interface Segregation of SOLID to declared Method for all Repositories
+		[ ] Must be developed with the implementation of: Interface Segregation of SOLID to declared Methods for all of Commands
+		[ ] Must be developed with the implementation of: Interface Segregation of SOLID to declared Methods for all of Handlers
+		[ ] Must be developed with the implementation of: MediatR pattern for it Inheritances on the Interface Segregation above
+		[ ] Must be developed with the implementation of: Try/Catch/Finally blocks inside all Handlers, for avoiding any crashes
+		[ ] Must be developed with the implementation of: Create/Update/Delete will work separated for Commands and for Handlers
+		[ ] Must be developed with the implementation of: Delete operation of inserts will be optimized through Update's Handler
+		[ ] Must be developed with the implementation of: As will exists Multiple Insert, will be initiate inside Create Handler
+		[ ] Must be developed with the implementation of: As will exists Multiple Insert, it will dealed through Updates Handler
+		[ ] Must be developed with the implementation of: Unity of Work pattern as Single Point of Failure with Rollback feature
+		[ ] Must be developed with the implementation of: Padronized returns for each Command operation inside Extension Methods
+		[ ] Must be developed with the implementation of: Specific infrastructure layer, that will utilize Entity Framework Core
+		[ ] Must be developed with the implementation of: Context scheme that will include all Tables/Mappings to these Entities
+		___________________________________________________________________________________________________  O P E R A T I O N S
+
+		R E A D  _______________________________________________________________________________________________________________
+		[ ] Must be developed with the implementation of: Specific infrastructure layer, that will use for it Dapper's Framework
+		[ ] Must be developed with the implementation of: Interface Segregation of SOLID to declared Method for all Repositories
+		[ ] Must be developed with the implementation of: Interface Segregation of SOLID to declared Methods for all the Queries
+		[ ] Must be developed with the implementation of: Interface Segregation of SOLID to declared Methods of the QueryHandler
+		[ ] Must be developed with the implementation of: Query segregation with Query + QueryHandler for this queryable content
+		[ ] Must be developed with the implementation of: MediatR pattern for it Inheritances on the Interface Segregation above
+		[ ] Must be developed with the implementation of: Separated ViewModels for GET and LIST queryable content to load entity
+		[ ] Must be developed with the implementation of: LIST ViewModel flow must has Pagination schema implemented to optimize
+		[ ] Must be developed with the implementation of: LIST ViewModel flow must has Search parameters to load specific entity
+		[ ] Must be developed with the implementation of: If possible, there must be the hierarchy of three levels to ViewModels
+		[ ] Must be developed with the implementation of: Will be used LINQ with Lambda Expressions to load its ViewModels above
+		[ ] Must be developed with the implementation of: Padronized results for each Queries operation inside Extension Methods
+		[ ] Must be developed with the implementation of: Caching schema padronized for GET and LIST queryable content of the DB
+		___________________________________________________________________________________________________  O P E R A T I O N S
+	},
+
+	classification : enumerator
+	{
+		[ ] EDisplacement | <Extension Method>
+		{
+            		[ ] Need = Needs a ride
+            		[ ] Give = Gives a ride
+            		[ ] Both = Both meet at
+		},
+
+		[ ] EStatus | <Extension Method>
+		{
+            		[ ] Requested = Waiting to be accepted
+            		[ ] Happening = Running after accepted
+            		[ ] Completed = Finished by a Prospect
+			[ ] Discarted = Declined by a Prospect
+        	}
+	},
+
+	class : entity
+	{
+		entity | Description: "Who another entities will extend of to it."
+		{
+			public Guid Id { get; private set; }
+			public DateTime CreatedAt { get; private set; }
+			public DateTime UpdatedAt { get; private set; }
+		},
+
+		prospect | Description: "Who will attend to the requesteds Dates." | One-To-Many
+		{
+			[ ] Queries: List, Get
+			[ ] Commands: Create, Read, Update, Delete
+
+				public string Name { get; private set; }
+				public decimal Goal { get; private set; }
+				public string Avatar { get; private set; } <Upload | ExtensionMethod>
+				public string WhatsApp { get; private set; }
+				public string Biography { get; private set; }
+				public DateOnly BirthDate { get; private set; }
+
+					public Situation Situation | <ValueObject>
+					{
+						public bool Active { get; private set; }
+						public bool Available { get; private set; }
+					}
+
+						private readonly List<Date> _dates = new List<Date>();
+						public IReadOnlyCollection<Date> Dates => _dates;
+						public void NewDate(Date date) => _dates.Add(date);
+		},
+
+		date | Description: "Who will request the Dates to the Prospects." | Many-To-One, One-To-One, One-To-Many
+		{
+			[ ] Queries: List, Get
+			[ ] Commands: Create, Read, Update, Delete
+			[ ] Actions: Request, Accept, Finish, Refuse
+
+				public string Name { get; private set; }
+				public string Title { get; private set; }
+				public EStatus Status { get; private set; } <Enumerator | Extension Method>
+				public string WhatsApp { get; private set; }
+				public DateTime Schedule { get; private set; }
+				public string Description { get; private set; }
+				public decimal Contribution { get; private set; }
+				public EDisplacement Displacement { get; private set; } <Enumerator | Extension Method>
+
+					public Guid ProspectId { get; private set; }
+					public Prospect Prospect { get; private set; }
+
+					public Guid LocationId { get; private set; }
+					public Location Location { get; private set; }
+
+						private readonly List<Personality> _personalities = new List<Personality>();
+						public IReadOnlyCollection<Personality> Personalities => _personalities;
+						public void NewPersonality(Personality personality) => _personalities.Add(personality);
+		},
+
+		location | Description: "Will be the location of requested Dates." | One-To-One
+		{
+			[ ] Queries: List, Get
+			[ ] Commands: Create, Read, Update, Delete
+
+				public string Latitude { get; private set; }
+				public string Longitude { get; private set; }
+
+					public Guid DateId { get; private set; }
+					public Date Date { get; private set; }
+		},
+
+		personality | Description: "Will exists inside to requested Date." | Many-To-One
+		{
+			[ ] Queries: List, Get
+			[ ] Commands: Create, Read, Update, Delete
+
+				public bool Funny { get; private set; }
+				public bool Serious { get; private set; }
+				public bool Talker { get; private set; }
+				public bool Listener { get; private set; }
+				public bool Outgoing { get; private set; }
+				public bool Conservative { get; private set; }
+
+					public Guid DateId { get; private set; }
+					public Date Date { get; private set; }
+		}
+	},
+
+	validation : restriction
+	{
+		[ ] prospect | Blocked when...
+		{
+			[ ] Update: prospect.Dates.Count(date => date.Status === EStatus.Requested) > 0
+			[ ] Delete: prospect.Dates.Count > 0
+		},
+
+		[ ] date | Blocked when...
+		{
+			[ ] Update: date.Status !== EStatus.Requested
+			[ ] Delete: date.Status !== EStatus.Requested
+		}
+	}
+}
